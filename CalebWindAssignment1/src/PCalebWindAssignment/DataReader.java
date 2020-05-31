@@ -5,12 +5,22 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * This class reads in the data from the CSV file using the Buffered Reader function.
+ * @author Caleb Wind
+ * 
+ *
+ */
 public class DataReader {
 	
 	public DataReader() {
-		
 	}
 	
+	/**
+	 * This is the method that reads in from the CSV file.
+	 * @return An ArrayList of Locations 
+	 * @throws IOException
+	 */
 	public ArrayList<Location> readIn() throws IOException
 	{
 		ArrayList<Location> locations = new ArrayList<Location>();

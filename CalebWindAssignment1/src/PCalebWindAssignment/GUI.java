@@ -1,13 +1,10 @@
 package PCalebWindAssignment;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import org.jfree.*;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -21,7 +18,6 @@ import org.jfree.data.xy.XYSeriesCollection;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.TableColumn;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
@@ -32,52 +28,44 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+/**
+ * This is a GUI that displays my data, graphs and search functionality.
+ * @author Caleb Wind
+ * @param contentPane The JPanel that everything is sitting on.
+ * @param panelSearch The JPanel that the search functionality is on.
+ * @param tablePanel The JPanel that the table sits on.
+ * @param indivdualRecord The JPanel that individual records are loaded on.
+ * @param myChartPanel The ChartPanel that the chart is displayed on.
+ * @param scrollPane The scroll pane by table uses to scroll.
+ * @param tabbedPane The tabbed pane all the JPanes are stored on.
+ * @param table the JTable that the data is loaded onto for display and sorting.
+ * @param indivPos This is an integer that is used to store the position of the individual record.
+ * @param locations The ArrayList that stores all of the locations and temperatures for each month.
+ * @param tm This is the table model used to create the table.
+ */
 public class GUI extends JFrame {
 
-	//create the JPanels my content is stored on
 	private JPanel contentPane;
 	private JPanel panelSearch = new JPanel();
-	private JPanel panel_1 = new JPanel();
+	private JPanel tablePanel = new JPanel();
 	private JPanel individualRecord = new JPanel();
-	
-	private ChartPanel myChartPanel;
-	
 
-	private JScrollPane scrollPane = new JScrollPane();
-	
-	//create the tabbed pane
+
+	private ChartPanel myChartPanel;	
+	private JScrollPane scrollPane = new JScrollPane();	
 	private JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-	
-	
-	//create the table
 	private JTable table;
-	
-	//this is the position the individual page works on. When the user clicks first, it sets it to 0 for example.
+
 	private int indivPos = 0;
-	
-	//create the array list we will be using to store the values we have read in
 	private static ArrayList<Location> locations;
 	
-	//create the table
 	private DefaultTableModel tm = new DefaultTableModel(
 			new Object[][] {,},
 			new String[]
 			{
 				"Town", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", "Year Average"
 			});
-
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GUI frame = new GUI(locations);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}}});
-		}
-
-	private JTable table_1;
+	
 	private JTextField txtTown;
 	private JTextField txtJan;
 	private JTextField txtFeb;
@@ -106,6 +94,7 @@ public class GUI extends JFrame {
 	private JTextField txtSearchNov;
 	private JTextField txtSearchDec;
 	private JTextField txtSearchAvg;
+	
 	/**
 	 * Create the frame.
 	 */
@@ -123,13 +112,13 @@ public class GUI extends JFrame {
 		tabbedPane.setBounds(5, 20, 992, 600);
 		contentPane.add(tabbedPane);
 		
-		tabbedPane.addTab("Table", null, panel_1, null);
-		panel_1.setLayout(null);
+		tabbedPane.addTab("Table", null, tablePanel, null);
+		tablePanel.setLayout(null);
 		
 		scrollPane.setBounds(10, 10, 973, 395);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		panel_1.add(scrollPane);
+		tablePanel.add(scrollPane);
 		
 		table = new JTable();
 		table.setModel(tm);
@@ -138,10 +127,6 @@ public class GUI extends JFrame {
 
 		tabbedPane.addTab("Individual Record", null, individualRecord, null);
 		individualRecord.setLayout(null);
-		
-		table_1 = new JTable();
-		table_1.setBounds(6, 5, 975, 15);
-		individualRecord.add(table_1);
 		
 		tabbedPane.addTab("Search", null, panelSearch, null);
 		panelSearch.setLayout(null);
@@ -154,6 +139,9 @@ public class GUI extends JFrame {
 		fillOutText();
 	}
 	
+	/**
+	 * This is the method that draws the main table
+	 */
 	public void drawMainTable()
 	{
 		tm.setRowCount(0); //clear the table
@@ -173,6 +161,10 @@ public class GUI extends JFrame {
 		}
 	}
 	
+	/**
+	 * This method is used to update the text boxes with the records specified.
+	 * @param searchPos This is the int that is inserted to update the text boxes with the record specified.
+	 */
 	public void fillOutSearch(int searchPos)
 	{
 		txtSearchTown.setText(locations.get(searchPos).getLocationName());
@@ -190,6 +182,9 @@ public class GUI extends JFrame {
 		txtSearchDec.setText(Double.toString((locations.get(searchPos).getTemperatures().get(11))));
 	}
 	
+	/**
+	 * This fills out the text boxes based on the position specified by the individual record display.
+	 */
 	public void fillOutText()
 	{
 		txtTown.setText(locations.get(indivPos).getLocationName());
@@ -207,6 +202,9 @@ public class GUI extends JFrame {
 		txtDec.setText(Double.toString((locations.get(indivPos).getTemperatures().get(11))));
 	}
 	
+	/**
+	 * This is the method that creates and draws the line chart.
+	 */
 	private void createALineChartTab()
 	{
 		XYDataset dataset = createDataset();
@@ -230,6 +228,9 @@ public class GUI extends JFrame {
 		tabbedPane.add("Line Chart", myChartPanel);
 	}
 	
+	/**
+	 * This method creates all the buttons and gives them functionality
+	 */
 	private void createButtons()
 	{
 		JButton btnSearch = new JButton("Search");
@@ -282,7 +283,7 @@ public class GUI extends JFrame {
 				drawMainTable();				
 			}
 		});
-		panel_1.add(btnSortAlphabetical);
+		tablePanel.add(btnSortAlphabetical);
 		
 		JButton btnNewButton = new JButton("Sort by Average Temp");
 		btnNewButton.setBounds(190, 433, 162, 21);
@@ -295,7 +296,7 @@ public class GUI extends JFrame {
 				drawMainTable();				
 			}
 		});
-		panel_1.add(btnNewButton);
+		tablePanel.add(btnNewButton);
 		
 		JButton btnNext = new JButton("Next");
 		btnNext.setBounds(214, 315, 85, 21);
@@ -363,6 +364,9 @@ public class GUI extends JFrame {
 		individualRecord.add(btnLast);
 	}
 	
+	/**
+	 * This method creates all of the labels and fills them out.
+	 */
 	private void createLabels()
 	{
 		JLabel lblJuly = new JLabel("July");
@@ -478,8 +482,12 @@ public class GUI extends JFrame {
 		panelSearch.add(lblNewLabel_1_3_1);
 	}
 	
+	/**
+	 * This method creates the text boxes 
+	 */
 	private void createTextBoxes()
 	{
+		
 		txtTown = new JTextField();
 		txtTown.setBounds(24, 86, 96, 19);
 		individualRecord.add(txtTown);
@@ -621,6 +629,9 @@ public class GUI extends JFrame {
 		panelSearch.add(txtSearchAvg);
 	}
 	
+	/**
+	 * @return the dataset generated based on the data in the table.
+	 */
 	private XYDataset createDataset() 
 	{
 		XYSeriesCollection dataset = new XYSeriesCollection();
