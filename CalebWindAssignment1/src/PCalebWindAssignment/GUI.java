@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 import org.jfree.*;
 import org.jfree.chart.ChartFactory;
@@ -33,7 +35,7 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 
-public class frameTestProper extends JFrame {
+public class GUI extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
@@ -63,7 +65,7 @@ public class frameTestProper extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					frameTestProper frame = new frameTestProper(locations);
+					GUI frame = new GUI(locations);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -90,7 +92,7 @@ public class frameTestProper extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public frameTestProper(ArrayList<Location> locations)
+	public GUI(ArrayList<Location> locations)
 	{
 		this.locations = locations;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -415,5 +417,11 @@ public class frameTestProper extends JFrame {
 		}
 		
 		return dataset;
+	}
+	
+
+	public void sort()
+	{
+		Arrays.sort(locations);
 	}
 }

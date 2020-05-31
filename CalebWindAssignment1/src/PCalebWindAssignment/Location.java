@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 
-public class Location {
+public class Location implements Comparable<Location>{
 	public String locationName; 
 	public ArrayList<Double> temperatures;
 	
@@ -53,19 +53,12 @@ public class Location {
 	{
 		return locationName + " " + temperatures.toString();
 	}
-	
-	
-	public int compareTo(Location f1)
+
+
+	@Override
+	public int compareTo(Location loc1)
 	{
-		//set up natural sort order
 		
-		if(locationName.equals(f1.getLocationName()))
-		{
-			return locationName.compareTo(f1.getLocationName());
-		}
-		else
-		{
-			return locationName.compareTo(f1.getLocationName());
-		}
+		return 0;
 	}
 }
