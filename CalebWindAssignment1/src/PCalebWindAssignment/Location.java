@@ -9,7 +9,6 @@ public class Location implements Comparable<Location>{
 	public String locationName; 
 	public ArrayList<Double> temperatures;
 	
-	public Double yearAverage;
 	
 	public Location(String locationName, ArrayList<Double> temperatures)
 	{
@@ -38,14 +37,15 @@ public class Location implements Comparable<Location>{
 		locationName = newLocationName;
 	}
 	
-	public Double getYearAverage()
+	public double calcYearAverage()
 	{
-		return yearAverage;
-	}
-	
-	public void setYearAverage(Double newYearAverage)
-	{
-		yearAverage = newYearAverage;
+		int total = 0;
+		
+		for (Double temp : temperatures)
+		{
+			total += temp;
+		}
+		return total / 12;
 	}
 	
 	@Override
@@ -53,7 +53,6 @@ public class Location implements Comparable<Location>{
 	{
 		return locationName + " " + temperatures.toString();
 	}
-
 
 	@Override
 	public int compareTo(Location loc1)
