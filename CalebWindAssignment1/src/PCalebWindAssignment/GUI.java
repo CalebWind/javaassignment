@@ -5,7 +5,6 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 import org.jfree.*;
@@ -15,9 +14,6 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.NumberTickUnit;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.data.DomainOrder;
-import org.jfree.data.general.DatasetChangeListener;
-import org.jfree.data.general.DatasetGroup;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
@@ -127,10 +123,10 @@ public class GUI extends JFrame {
 		btnSort.addActionListener(new ActionListener() {
 			
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				//locations.sort();
-				drawMainTable();
-				
+			public void actionPerformed(ActionEvent e)
+			{
+				Collections.sort(locations);				
+				drawMainTable();				
 			}
 		});
 		panel_1.add(btnSort);
@@ -420,8 +416,5 @@ public class GUI extends JFrame {
 	}
 	
 
-	public void sort()
-	{
-		Arrays.sort(locations);
-	}
+	
 }

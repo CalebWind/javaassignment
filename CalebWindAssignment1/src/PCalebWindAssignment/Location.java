@@ -58,7 +58,7 @@ public class Location implements Comparable<Location>{
 	@Override
 	public int compareTo(Location loc1)
 	{
-		
-		return 0;
+		//setting up natural sort order
+		return locationName.compareTo(loc1.getLocationName());
 	}
 }
