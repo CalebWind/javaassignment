@@ -42,6 +42,9 @@ public class GUI extends JFrame {
 	
 	private ChartPanel myChartPanel;
 	
+
+	private JScrollPane scrollPane = new JScrollPane();
+	
 	//create the tabbed pane
 	private JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 	
@@ -108,6 +111,7 @@ public class GUI extends JFrame {
 	 */
 	public GUI(ArrayList<Location> locations)
 	{
+		setTitle("Average Temperature over 30 years");
 		this.locations = locations;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 1117, 1200);
@@ -122,7 +126,6 @@ public class GUI extends JFrame {
 		tabbedPane.addTab("Table", null, panel_1, null);
 		panel_1.setLayout(null);
 		
-		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 10, 973, 395);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
