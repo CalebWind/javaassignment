@@ -13,6 +13,7 @@ import java.util.ArrayList;
  */
 public class mainApp
 {
+	private static DataReader dr;
 	public static ArrayList<Location> locations = new ArrayList<Location>();
 	
 	/**
@@ -23,7 +24,7 @@ public class mainApp
 	 */
 	public static void main(String[] args) throws IOException
 	{
-		DataReader dr = new DataReader();
+		dr = new DataReader();
 		locations = dr.readIn();
 		GUI gui = new GUI(locations);
 		gui.setVisible(true);
