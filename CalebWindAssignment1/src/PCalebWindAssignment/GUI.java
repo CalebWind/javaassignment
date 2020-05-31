@@ -237,7 +237,7 @@ public class GUI extends JFrame {
 			public void actionPerformed(ActionEvent e)
 			{
 				//search
-				if (txtSearchInput.getText() == null)
+				if (txtSearchInput.getText().isEmpty())
 				{
 					JOptionPane.showMessageDialog(null, "Error, no input detected");
 				}
@@ -256,10 +256,10 @@ public class GUI extends JFrame {
 						}
 						
 					}
-				//	if (sPos == max)
-				//	{
-				//		JOptionPane.showMessageDialog(null, "Error, town not found");
-					//}
+					if (sPos == 30)
+					{
+						JOptionPane.showMessageDialog(null, "Error, town not found");
+					}
 					
 				}
 				
