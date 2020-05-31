@@ -19,6 +19,7 @@ import java.util.Comparator;
 public class Location implements Comparable<Location>{
 	public String locationName; 
 	public ArrayList<Double> temperatures;
+	public double yearAverage;
 	
 	
 	/**
@@ -61,6 +62,23 @@ public class Location implements Comparable<Location>{
 	}
 	
 	/**
+	 * This method is used to update the year average.
+	 * @param newYearAverage The new year average for the location.
+	 */
+	public void setYearAverage(double newYearAverage)
+	{
+		yearAverage = newYearAverage;
+	}
+	
+	/**
+	 * This method is used to return the year average.
+	 * @return The year average.
+	 */
+	public Double getYearAverage() {
+		return yearAverage;
+	}
+	
+	/**
 	 * This method is used to update the location name.
 	 * @param newLocationName The new name for the location.
 	 */
@@ -81,8 +99,11 @@ public class Location implements Comparable<Location>{
 		{
 			total += temp;
 		}
-		return total / 12;
+		yearAverage = total / 12;
+		return yearAverage;
 	}
+	
+	
 	
 	/**
 	 * This is a method that overrides the ToString function. It will instead format the output a bit more attractively.

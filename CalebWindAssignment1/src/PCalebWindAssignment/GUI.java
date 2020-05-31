@@ -226,6 +226,7 @@ public class GUI extends JFrame {
 		
 		myChartPanel = new ChartPanel(chart);
 		tabbedPane.add("Line Chart", myChartPanel);
+		myChartPanel.setLayout(null);
 	}
 	
 	/**
@@ -292,8 +293,18 @@ public class GUI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				Collections.sort(locations);				
-				drawMainTable();				
+				double temp;
+				for (int i = 0; i < locations.size() - 1; i++) {
+					for (int j = 0; j < locations.size() - 1; j++) {
+						if (locations.get(j).calcYearAverage() > locations.get(j + 1).calcYearAverage())
+						{
+							temp = locations.get(j + 1).calcYearAverage();
+							locations.get(j + 1).setYearAverage(locations.get(j).getYearAverage());
+							locations.get(j).setYearAverage(temp);
+						}
+					}
+				}			
+				drawMainTable();			
 			}
 		});
 		tablePanel.add(btnNewButton);
