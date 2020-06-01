@@ -60,8 +60,7 @@ public class GUI extends JFrame {
 	private static ArrayList<Location> locations;
 	
 	private DefaultTableModel tm = new DefaultTableModel(
-			new Object[][] {,},
-			new String[]
+			new Object[][] {,}, new String[]
 			{
 				"Town", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", "Year Average"
 			});
